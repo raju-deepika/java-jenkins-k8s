@@ -15,7 +15,7 @@ pipeline {
 stage('Build and Test') {
       steps {
         // build the project and create a JAR file
-        sh 'cd java-jenkins-k8s/spring-boot-app && mvn clean package'
+        sh 'cd spring-boot-app && mvn clean package'
       }
     }
    
