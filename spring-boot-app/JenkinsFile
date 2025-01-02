@@ -13,7 +13,7 @@ pipeline {
       }
     }
    
-    }
+    }//added by deepika
 
   
 }
