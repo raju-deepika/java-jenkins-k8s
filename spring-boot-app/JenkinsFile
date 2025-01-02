@@ -12,8 +12,15 @@ pipeline {
         //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
       }
     }
+stage('Build and Test') {
+      steps {
+        // build the project and create a JAR file
+        sh 'cd java-jenkins-k8s/spring-boot-app && mvn clean package'
+      }
+    }
    
     }//added by deepika
+
 
   
 }
