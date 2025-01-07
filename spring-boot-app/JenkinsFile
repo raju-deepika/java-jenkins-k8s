@@ -45,8 +45,8 @@ stage('Static Code Analysis') {
     }
   stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = "raju-deepika"
-            GIT_USER_NAME = "rajudeepika260@gmail"
+            GIT_REPO_NAME = "java-jenkins-k8s"
+            GIT_USER_NAME = "raju-deepika"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
