@@ -28,5 +28,20 @@ stage('Static Code Analysis') {
         }
       }
     }
+ stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "9845468252/cicd-demo:${BUILD_NUMBER}"
+        REGISTRY_CREDENTIALS = credentials('docker-cred')
+      }
+      steps {
+        script {
+            sh 'cd spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                dockerImage.push()
+            }
+        }
+      }
+    }
     }
 }
