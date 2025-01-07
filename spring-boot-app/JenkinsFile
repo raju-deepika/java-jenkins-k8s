@@ -43,5 +43,24 @@ stage('Static Code Analysis') {
         }
       }
     }
+  stage('Update Deployment File') {
+        environment {
+            GIT_REPO_NAME = "raju-deepika"
+            GIT_USER_NAME = "rajudeepika260@gmail"
+        }
+        steps {
+            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                    git config user.email "rajudeepika260@gmail"
+                    git config user.name "Deepika"
+                    BUILD_NUMBER=${BUILD_NUMBER}
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml
+                    git add spring-boot-app-manifests/deployment.yml
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                '''
+            }
+        }
+    }
     }
 }
